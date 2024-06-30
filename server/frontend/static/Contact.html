@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <style>
+        .custom-image {
+            height: auto;
+            max-height: 500px;
+            width: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkturquoise; height: 1in;">
+            <div class="container-fluid">
+                <h2 style="padding-right: 5%;">Dealerships</h2>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Contact Us</h1>
+                </div>
+                <div class="card-body">
+                    <img src="/static/contactus.jpeg" class="img-fluid custom-image mb-4" alt="Contact Us">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p><strong>Contact customer service</strong><br>Email: support@example.com</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p><strong>Contact our National Advertising Team</strong><br>Email: nationalsales@example.com</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p><strong>Contact our public relations team</strong><br>Email: pr@example.com</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p><strong>Contact the bestcars.com offices</strong><br>Phone: 777-777-7777</p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="text-center"><strong>Become a bestcars car dealer</strong><br>Visit <a href="http://growwithbestcars.com">growwithbestcars.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/bootstrap.bundle.min.js"></script>
+</body>
+</html>
