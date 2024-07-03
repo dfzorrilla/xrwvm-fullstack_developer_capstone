@@ -12,9 +12,10 @@ sentiment_analyzer_url = os.getenv(
     'sentiment_analyzer_url', default="http://localhost:5050/"
 )
 
+
 def get_request(endpoint, **kwargs):
     """
-    Send a GET request to the specified endpoint with optional query parameters.
+    Send a GET request to specified endpoint with optional query parameters.
 
     Args:
         endpoint (str): The endpoint to append to the backend URL.
@@ -38,9 +39,10 @@ def get_request(endpoint, **kwargs):
         print(f"Network exception occurred: {e}")
         return {"error": "Network exception occurred"}
 
+
 def analyze_review_sentiments(text):
     """
-    Send a GET request to the sentiment analyzer URL to analyze review sentiments.
+    Send a GET request to sentiment analyzer URL to analyze review sentiments.
 
     Args:
         text (str): The text of the review to analyze.
@@ -56,6 +58,7 @@ def analyze_review_sentiments(text):
     except requests.RequestException as e:
         print(f"Network exception occurred: {e}")
         return {"sentiment": "unknown"}
+
 
 def post_review(data_dict):
     """
