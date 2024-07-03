@@ -2,8 +2,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib import admin  # Import this at the top of the file
-from .models import CarMake, CarModel  # Import this at the top of the file
-
 
 # Create your models here.
 
