@@ -4,44 +4,78 @@ on:
     branches: [master, main]
   pull_request:
     branches: [master, main]
+
 jobs:
   lint_python:
     name: Lint Python Files
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.12
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8
-    - name: Print working directory
-      run: pwd
-    - name: Run Linter
-      run: |
-        pwd
-        # This command finds all Python files recursively and runs flake8 on them
-        find . -name "*.py" -exec flake8 {} +
-        echo "Linted all the python files successfully"
-  lint_js:
-      name: Lint JavaScript Files
-      runs-on: ubuntu-latest
-      steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Install Node.js
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Print Working Directory
+        run: pwd
+      
+      - name: Run Flake8 Linter
+        run: |
+          # This command finds all Python files recursively and runs flake8 on them
+          find . -name "*.py" -exec flake8 {} +
+          echo "Linted all the Python files successfully"
+
+  lint_js:
+    name: Lint JavaScript Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Install JSHint
-        run: npm install jshint --global
-      - name: Run Linter
+          node-version: 18  # Updated to a more recent LTS version
+
+      - name: Install ESLint and JSHint
+        run: |
+          npm install -g jshint eslint
+          # Install ESLint dependencies for the project
+          npm install
+          
+      - name: Configure ESLint
+        run: |
+          echo '{
+            "env": {
+              "es6": true,
+              "node": true
+            },
+            "extends": [
+              "eslint:recommended",
+              "airbnb-base"
+            ],
+            "parserOptions": {
+              "ecmaVersion": 2021,
+              "sourceType": "module"
+            },
+            "rules": {}
+          }' > .eslintrc.js
+          
+      - name: Run JSHint Linter
         run: |
           # This command finds all JavaScript files recursively and runs JSHint on them
           find ./server/database -name "*.js" -exec jshint {} +
-          echo "Linted all the js files successfully"
+          echo "Linted all the JavaScript files successfully"
+      
+      - name: Run ESLint
+        run: |
+          # Run ESLint on the JavaScript files in the project
+          npx eslint . --ext .js
+          echo "Linted all the JavaScript files successfully"
