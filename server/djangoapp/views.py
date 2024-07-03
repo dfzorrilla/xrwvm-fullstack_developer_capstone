@@ -1,12 +1,10 @@
 # Uncomment the required imports before adding the code
 import json
 import logging
-from datetime import datetime
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from .populate import initiate
@@ -110,7 +108,9 @@ def get_dealer_reviews(request, dealer_id):
         reviews = get_request(endpoint)
 
         if reviews is None:
-            return JsonResponse({"status": 500, "message": "Error fetching reviews"})
+            return JsonResponse(
+                {"status": 500, "message": "Error fetching reviews"}
+            )
 
         for review_detail in reviews:
             response = analyze_review_sentiments(review_detail['review'])
