@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -44,11 +44,19 @@ jobs:
         with:
           node-version: 18  # Updated to a more recent LTS version
 
+      - name: Install Node.js Dependencies
+        run: |
+          # Ensure that package.json is present and install dependencies
+          if [ -f package.json ]; then
+            npm install
+          else
+            echo "Error: package.json file not found!"
+            exit 1
+          fi
+
       - name: Install ESLint and JSHint
         run: |
           npm install -g jshint eslint
-          # Install ESLint dependencies for the project
-          npm install
           
       - name: Configure ESLint
         run: |
@@ -67,7 +75,7 @@ jobs:
             },
             "rules": {}
           }' > .eslintrc.js
-          
+
       - name: Run JSHint Linter
         run: |
           # This command finds all JavaScript files recursively and runs JSHint on them
